@@ -30,7 +30,7 @@ for (let k = 0; k < pictures.length; k++) {
     picture.appendChild(images[k]);
     var information = document.createElement("p");
     information.style.fontSize = "12px";
-    information.textContent = "Name: " + movieData[k][0] + " | Duration: " + movieData[k][1] + " minutes | Year: " + movieData[k][2] + " | Your rating: " + localStorage.getItem(movieData[k][1]);
+    information.textContent = "Name: " + movieData[k][0] + " | Duration: " + movieData[k][1] + " minutes | Year: " + movieData[k][2] + " | Your rating: " + localStorage.getItem(movieData[k][0]);
     var information2 = document.createElement("p");
     information2.style.fontSize = "12px";
     information2.textContent = "Description:" + movieData[k][3];
@@ -43,8 +43,9 @@ for (let k = 0; k < pictures.length; k++) {
     const button = document.createElement('button');
     button.innerText = 'Rate';
     button.addEventListener('click', () => {
-        var rating = prompt("What do you rate this");
-        localStorage.setItem(movieData[k][1], rating);
+        var rating = prompt("What do you rate this out of 5");
+        localStorage.setItem(movieData[k][0], rating);
+        location.reload();
     })
     picture.appendChild(button);
     var space = document.createElement("p");
@@ -65,7 +66,7 @@ for (let l = 0; l < pictures2.length; l++) {
     picture2.appendChild(images2[l]);
     var information4 = document.createElement("p");
     information4.style.fontSize = "12px";
-    information4.textContent = "Name: " + movieData2[l][0] + " | Duration: " + movieData2[l][1] + " minutes | Year: " + movieData2[l][2] + " | Your rating: " + localStorage.getItem(movieData2[l][1]);
+    information4.textContent = "Name: " + movieData2[l][0] + " | Duration: " + movieData2[l][1] + " minutes | Year: " + movieData2[l][2] + " | Your rating: " + localStorage.getItem(movieData2[l][0]);
     var information5 = document.createElement("p");
     information5.style.fontSize = "12px";
     information5.textContent = "Description:" + movieData2[l][3];
@@ -78,11 +79,27 @@ for (let l = 0; l < pictures2.length; l++) {
     const button2 = document.createElement('button');
     button2.innerText = 'Rate';
     button2.addEventListener('click', () => {
-        var rating2 = prompt("What do you rate this");
-        localStorage.setItem(movieData2[l][1], rating2);
+        var rating2 = prompt("What do you rate this out of 5");
+        localStorage.setItem(movieData2[l][0], rating2);
+        location.reload();
     })
     picture2.appendChild(button2);
     var space = document.createElement("p");
     space.textContent = "    ";
     picture2.appendChild(space);
+}
+var images3 = new Array()
+for (let a = 0; a < pictures.length; a++) {
+    img3 = new Image();
+    img3.src = pictures[a];
+    images3[a] = img3;
+}
+var picture3 = document.getElementById("moviesSeen");
+for (let i = 0; i < pictures.length; i++) {
+    var temp = localStorage.getItem(movieData[i][0]);
+    if (temp == "1" || temp == "2" || temp == "3" || temp == "4" || temp == "5") {
+        images3[i].height = 350;
+        images3[i].width = 260;
+        picture3.appendChild(images3[i]);
+    }
 }
